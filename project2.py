@@ -95,3 +95,7 @@ def load_transport_data(path: str) -> list[TransportationData]:
             data.append(TransportationData(date, cars, lcv, hgv, mv, nr, lt, lb, nb, cyc))
 
     return data
+
+
+graph_data = 'Testing'
+print(graph_data)
