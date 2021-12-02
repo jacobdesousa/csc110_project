@@ -6,6 +6,8 @@ Analysis of COVID-19 case data in relation to transportation trends in the UK.
 from dataclasses import dataclass
 import datetime
 import csv
+import dash
+import pandas
 
 
 @dataclass
