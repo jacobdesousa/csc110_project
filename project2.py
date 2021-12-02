@@ -93,5 +93,5 @@ def load_transport_data(path: str) -> list[TransportationData]:
             nb = int(row[8].removesuffix('%'))
             cyc = int(row[9].removesuffix('%'))
             data.append(TransportationData(date, cars, lcv, hgv, mv, nr, lt, lb, nb, cyc))
-
+    g = 'test'
     return data
