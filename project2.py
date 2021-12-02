@@ -60,7 +60,7 @@ def load_case_data(path: str) -> list[CaseData]:
 
         for row in reader:
             assert len(row) == 6
-            date = datetime.date(int(row[3][0:4]), int(row[3][8:10]), int(row[3][5:7]))
+            date = datetime.date(int(row[3][0:4]), int(row[3][5:7]), int(row[3][8:10]))
             new_cases = int(row[4])
             cum_cases = int(row[5])
             data.append(CaseData(date, new_cases, cum_cases))
