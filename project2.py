@@ -94,4 +94,7 @@ def load_transport_data(path: str) -> list[TransportationData]:
             cyc = int(row[9].removesuffix('%'))
             data.append(TransportationData(date, cars, lcv, hgv, mv, nr, lt, lb, nb, cyc))
 
+
+    g = "hello world"
     return data
+
