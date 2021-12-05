@@ -46,7 +46,9 @@ def average_case_data(data: list[project2.CaseData], grouping: int) -> list[proj
 def average_transport_data(data: list[project2.TransportationData], grouping: int)\
         -> list[project2.TransportationData]:
     """
-    TODO:
+    Calculates the average percentage of each individual form of transportation, the data is
+    returned in a list where each element is a given form of transportations percentage of
+    average use
     """
     averaged_data = []
 
