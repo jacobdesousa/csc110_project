@@ -15,6 +15,11 @@ class CaseData:
     """
     Formatted data from the COVID-19 case data
 
+    Instance Attributes
+      - date: the date of which the data was collected
+      - num_cases: the number of cases recorded at the given date
+      - cum_cases: the number of cumulative cases in the UK
+
     Representation Invariants:
       - self.new_cases >= 0
       - self.cum_cases >= 0
@@ -28,6 +33,17 @@ class CaseData:
 class TransportationData:
     """
     Formatted data from the UK transport dataset. -1 integer value represents no data for that given entry.
+
+    Instance Attributes:
+     -  date: the date of when the data was collected
+     -  cars: the percentage of cars being used at the given date
+     -  light_commercial_vehicles: the percentage of light commercial vehicles being used
+     -  heavy_goods_vehicles: the percentage of heavy goods vehicles being used
+     -  all_motor_vehicles: the general percentage of all motor vehicles being used
+     -  national_rail: the percentage of which trains are used
+     -  london_tube: the percentage the London tube was being used
+     -  london_buses: the percentage of London buses being used
+     -  cycling: the percentage of bicycles being used
 
     Representation Invariants:
       - self.cars >= -1
