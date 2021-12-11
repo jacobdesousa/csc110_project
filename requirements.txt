@@ -1,4 +1,8 @@
 dash
 pandas
-requests
 plotly
+hypothesis
+pygame
+Pillow
+pytest
+requests
