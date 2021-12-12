@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 import pandas as pd
 import project2
+import datetime
 
 app = dash.Dash(__name__)
 transport_data = project2.load_transport_data('transport_data_mod.csv')
@@ -184,7 +185,14 @@ app.layout = html.Div(children=[
             id='case-graph',
             figure=fig
         )
-    ])
+    ]),
+    html.H6("Change the date to see that dates values! (please follow a yyyy/mm/dd format)"),
+    html.Div([
+        "Input: ",
+        dcc.Input(id='my-input', value='initial value', type='text')
+    ]),
+    html.Br(),
+    html.Div(id='my-output')
 ])
 
 
@@ -195,6 +203,33 @@ app.layout = html.Div(children=[
 )
 def update_graph(scale):
     dff = pd.DataFrame({})
+
+
+@app.callback(
+    dash.dependencies.Output(component_id='my-output', component_property='children'),
+    dash.dependencies.Input(component_id='my-input', component_property='value')
+)
+def update_output_div(input_value):
+    date = datetime.date(int(input_value[0:4]), int(input_value[5:7]), int(input_value[8:10]))
+    sp_cases = ''
+    sp_cars = ''
+    sp_national_rail = ''
+    sp_national_buses = ''
+    for a1 in case_data:
+        if a1.date == date:
+            sp_cases = str(a1.new_cases)
+
+    for a1 in transport_data:
+        if a1.date == date:
+            sp_cars = str(a1.cars) + '%'
+            sp_national_rail = str(a1.national_rail) + '%'
+            sp_national_buses = str(a1.national_buses) + '%'
+
+    return ('New Cases: ' + sp_cases +
+            ',\n Cars: ' + sp_cars +
+            ',\n National Rail: ' + sp_national_rail +
+            ',\n National Buses: ' + sp_national_buses
+            )
 
 
 if __name__ == '__main__':
