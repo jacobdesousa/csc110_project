@@ -7,7 +7,7 @@ from dash import dcc
 from dash import html
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import plotly.express as px
+from dash.dependencies import Input, Output
 import pandas as pd
 import project2
 
@@ -159,11 +159,43 @@ fig.update_yaxes(title_text='Cases', secondary_y=False)
 
 
 app.layout = html.Div(children=[
-    dcc.Graph(
-        id='case-graph',
-        figure=fig
-    )
+
+    html.Div(children=[
+        html.Label('Modes of Transportation'),
+        dcc.Checklist(
+            id='modes',
+            options=[
+                {'label': 'Cars', 'value': 'CARS'},
+                {'label': 'Light Commercial Vehicles', 'value': 'LCV'},
+                {'label': 'Heavy Goods Vehicles', 'value': 'HGV'},
+                {'label': 'All Motor Vehicles', 'value': 'AMV'},
+                {'label': 'National Rail', 'value': 'NR'},
+                {'label': 'London Tube', 'value': 'LT'},
+                {'label': 'London Buses', 'value': 'LB'},
+                {'label': 'National Buses', 'value': 'NB'},
+                {'label': 'Cycling', 'value': 'CYC'},
+            ],
+            value=[]
+        )
+    ], style={'width': '48%', 'display': 'inline-block'}),
+
+    html.Div(children=[
+        dcc.Graph(
+            id='case-graph',
+            figure=fig
+        )
+    ])
 ])
+
+
+@app.callback(
+    Output('graphic', 'figure'),
+    Input('scale', 'value'),
+    Input('lines', 'value')
+)
+def update_graph(scale):
+    dff = pd.DataFrame({})
+
 
 if __name__ == '__main__':
     app.run_server(debug=False)
