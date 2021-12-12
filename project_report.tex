@@ -29,7 +29,7 @@ With the materials and data sets we found we will attempt to answer the question
 Usage of different modes of transportation (tracked through percentage - as compared to a set baseline), by date throughout the Covid-19 pandemic
     \begin{enumerate}  
         \item From: gov.uk,  a repository of data collected by different government entities, all publish under the open government license (free to read and use)
-        \item We will be modifying the file so that it only contains the time range from January 3, 2020 to October 25, 2021
+        \item We will be modifying the file so that it only contains the time range from March 1, 2020 to October 25, 2021
         \item The format of the file is CSV and we will be using all of the available columns as follows
         \begin{enumerate}
             \item Date
@@ -43,11 +43,11 @@ Usage of different modes of transportation (tracked through percentage - as comp
             \item Bus (excluding London)
             \item Cycling
         \end{enumerate}
-    \end{enumerate}  
+    \end{enumerate}
     \item Data Set 2(Coronavirus (COVID-19) in the UK): New cases by date, and cumulative cases at the given date throughout the Covid-19 pandemic.
-    \begin{enumerate}  
-        \item From: gov.uk,  a repository of data collected by different government entities, all publish under the open government license (free to read and use) 
-        \item We will be modifying the file so that it only contains the time range from January 3, 2020 to October 25, 2021
+    \begin{enumerate}
+        \item From: gov.uk,  a repository of data collected by different government entities, all publish under the open government license (free to read and use)
+        \item We will be modifying the file so that it only contains the time range from March 1, 2020 to October 25, 2021
         \item The format of the file is CSV and we will be using the columns as follows
         \begin{enumerate}
             \item date
@@ -55,20 +55,20 @@ Usage of different modes of transportation (tracked through percentage - as comp
             \item cumCasesBySpecimenDate
         \end{enumerate}
 
-    \end{enumerate}  
-\end{enumerate}   
-  
-\section*{Computational Plan}  
-  
-\begin{enumerate}  
-    \item We took the multiple csv files from our sources and extracted the data into PyCharm   
-    \item We wrote classes for data entries from our data sets. Specifically we will have a class for a piece of transportation data (ex Cars, Tube, Bus etc.), and a class for a piece of case data. Each class includes an attribute for each field in the original tables.   
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Computational Plan}
+
+\begin{enumerate}
+    \item We took the multiple csv files from our sources and extracted the data into PyCharm
+    \item We wrote classes for data entries from our data sets. Specifically we will have a class for a piece of transportation data (ex Cars, Tube, Bus etc.), and a class for a piece of case data. Each class includes an attribute for each field in the original tables.
     \item Loaded data into Python using a load data function. The function returns a list of class instances named CaseData as well as TransportationData, each including one row of data from our data sets. This function was used on both data sets
-    \item We created helper functions named average\_case\_data as well as average\_transport\_data that calculate the averages of the respective data in order to be displayed on the graph This function will return data averages over a given interval. For example, if you want to view data by month, the function returns an average of data from each month instead of the daily data that our data sets contain.  
+    \item We created helper functions named average\_case\_data as well as average\_transport\_data that calculate the averages of the respective data in order to be displayed on the graph This function will return data averages over a given interval. For example, if you want to view data by month, the function returns an average of data from each month instead of the daily data that our data sets contain.
     \item We used plotly to create a user interface, allowing the data to be viewed in many different ways, each of the mode of transportation can be selected to be shown on the graph to help the user compare the data.
     \item When our program is run it will prompt the user to head to a web address where they can view a line graph of contaning the average Covid cases found over the given time interval, as well as the different forms of transportation used over the same interval. By displaying the data in this way it helps to answer or research question with the aid of a visual
-    \item We also implemented a changeable scale. For example having time broken down by day, week, and month. This way we can account for outliers in the data, for instance if there was a lot more train travel than usual on a holiday, it would not affect the graph as much with a wider scale. This proves also to be useful for narrowing down on a particular range of data, say one particular wave of COVID cases.  
-\end{enumerate}  
+    \item We also implemented a changeable scale. For example having time broken down by day, week, and month. This way we can account for outliers in the data, for instance if there was a lot more train travel than usual on a holiday, it would not affect the graph as much with a wider scale. This proves also to be useful for narrowing down on a particular range of data, say one particular wave of COVID cases.
+\end{enumerate}
 
 \section*{Instructions for Obtaining the data sets and running our program}
 \begin{enumerate}
@@ -89,20 +89,34 @@ Usage of different modes of transportation (tracked through percentage - as comp
 \section*{Changes made since proposal}
 Since the project proposal was submitted we removed the addition of international Canadian travellers from the data we are processing, we felt it would be much better if we focused on transportation in the UK and how it was affected by the Covid-19 pandemic. We also added a concrete example in the introduction of the report to show how transportation was affected at the start of the pandemic. We also modified the title of our project to better encompass the topic we are trying to cover.
 
-\section*{References}  
-\begin{hangparas}{.25in}{1}  
-\textit{Plotly python graphing library. } Plotly. (n.d.). Retrieved October 29, 2021, from https://plotly.com/python/. \\  
-  
-  
-Transport, D. for. (2021, October 27). \textit{Transport use during the coronavirus (COVID-19) pandemic.} GOV.UK. Retrieved October 29, 2021, from https://www.gov.uk/government/statistics/transport-use-during-the-coronavirus-covid-19-pandemic. \\  
-  
-  
-\textit{United Kingdom.} Coronavirus (COVID-19) in the UK. (n.d.). Retrieved October 29, 2021, \\ from https://coronavirus.data.gov.uk/.  
-  
-% NOTE: LaTeX does have a built-in way of generating references automatically,  
-% but it's a bit tricky to use so we STRONGLY recommend writing your references  
-% manually, using a standard academic format like APA or MLA.  
-% (E.g., https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/general_format.html)  
-  
-\end{hangparas}  
-\end{document}  
+
+\section*{Discussion}
+
+The research question are group attempted to answer was \textbf{Did confirmed Covid-19 cases have a relation to the amount transportation was used, if so how much was it affected? Also which methods of transportation's were affected the most?} \\ \\
+
+By analysing different data sets from the government of the United Kingdom, our group can conclude there is a co relation between the number of confirmed Covid-19 cases in the United Kingdom and the use of different transportation systems. Throughout the years our program examined it is clear to see that as the number of confirmed cases rose, the use of many transportation systems such as cars, the tube, busses etc., became less and less. We can see this trend was reversed as the number of cases goes down. It is interesting to note however one of the findings we uncovered was if we look at the use of cars through March 2020, to October 2021, we can see that it does dip down as cases increase, but as cases decrease the percentage of cars almost returns to the amount it was at before. However, if we use a similar idea to compare the national rail or national buses, we can see that there usage never quite reached what it originally was before March 2020. Through this analysis we can conclude that the usage of public transit continued to decline through the pandemic. \\ \\
+
+The limitations with the datasets we found were the range in dates that were available, we would have liked to analyze some of the transportation usage before the beginning of the pandemic, but the data was not available from the government of the United Kingdom website. It would have been interesting to see if these numbers fluctuated as much as they did during the pandemic. \\ \\
+
+After looking at the results our group was able to create through our program, an area of further exploration would be seeing if these trends are like different countries around the world. We were able to conclude that there is a correlation between the number of confirmed Covid-19 cases and the modes of transportation, however, can we find this correlation in other countries outside the United Kingdom. More specifically comparing a developed and a developing country to see if these trends are the same. One country that would be very interesting to analyze would be the United States as they handled Covid very differently than the rest of the world, one could compare similar statistics with the ones from the United Kingdom and see how the forms of transportation are impacted. Finally taking this idea one step further one could further explore the use of air travel in relation to confirmed Covid 19 cases, and observe if the use of air travel is being used as much as it was before the pandemic \\ \\
+
+In conclusion, our group was able to successfully take a research area in question, analyze available data and formulate a proper response to the question we had originally asked. T The dash library had lots of available tools for our group to use to further analyse our research question and visualize an answer he area of interest we chose leaves lots of room for further exploration and would be very interesting to further analyze.
+
+
+\section*{References}
+\begin{hangparas}{.25in}{1}
+\textit{Plotly python graphing library. } Plotly. (n.d.). Retrieved October 29, 2021, from https://plotly.com/python/. \\
+
+
+Transport, D. for. (2021, October 27). \textit{Transport use during the coronavirus (COVID-19) pandemic.} GOV.UK. Retrieved October 29, 2021, from https://www.gov.uk/government/statistics/transport-use-during-the-coronavirus-covid-19-pandemic. \\
+
+
+\textit{United Kingdom.} Coronavirus (COVID-19) in the UK. (n.d.). Retrieved October 29, 2021, \\ from https://coronavirus.data.gov.uk/.
+
+% NOTE: LaTeX does have a built-in way of generating references automatically,
+% but it's a bit tricky to use so we STRONGLY recommend writing your references
+% manually, using a standard academic format like APA or MLA.
+% (E.g., https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/general_format.html)
+
+\end{hangparas}
+\end{document}
