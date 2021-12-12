@@ -23,6 +23,9 @@ def average_case_data(data: list[project2.CaseData], grouping: int) -> list[proj
     :param data: CaseData objects in a list
     :param grouping: How many entries to average
     :return: List of CaseData averaged
+
+    Preconditions
+        - 1 < grouping < 100
     """
     averaged_data = []
 
@@ -49,6 +52,9 @@ def average_transport_data(data: list[project2.TransportationData], grouping: in
     Calculates the average percentage of each individual form of transportation, the data is
     returned in a list where each element is a given form of transportations percentage of
     average use
+
+    Preconditions
+        - 1 < grouping < 100
     """
     averaged_data = []
 
@@ -95,12 +101,16 @@ def average_transport_data(data: list[project2.TransportationData], grouping: in
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
+user_input = int(input('Please enter your value: '))
 df = pd.DataFrame({
-    "Dates": [x.date for x in average_case_data(case_data, 10)],
-    "Cases": [x.new_cases for x in average_case_data(case_data, 10)],
+    "Dates": [x.date for x in average_case_data(case_data, user_input)],
+    "Cases": [x.new_cases for x in average_case_data(case_data, user_input)],
     # "All Motor Vehicles": [x.all_motor_vehicles for x in transport_data],
-    "Cars": [x.cars for x in average_transport_data(transport_data, 10)],
+    "Cars": [x.cars for x in average_transport_data(transport_data, user_input)],
     # "Tube": [x.london_tube for x in transport_data]
+    "National Rail": [x.national_rail for x in average_transport_data(transport_data, user_input)],
+    "National Buses": [x.national_buses for x in average_transport_data(transport_data, user_input)],
+    "Cycling": [x.cycling for x in average_transport_data(transport_data, user_input)]
 })
 
 fig = make_subplots(specs=[[{"secondary_y": True}]])
@@ -114,6 +124,20 @@ fig.add_trace(
     go.Line(x=df.get("Dates"), y=df.get("Cars"), name='Cars'),
     secondary_y=True
 )
+
+fig.add_trace(
+    go.Line(x=df.get("Dates"), y=df.get("National Rail"), name='National Rail'),
+    secondary_y=True
+)
+fig.add_trace(
+    go.Line(x=df.get("Dates"), y=df.get("National Buses"), name='National Buses'),
+    secondary_y=True
+)
+
+# fig.add_trace(
+#    go.Line(x=df.get("Dates"), y=df.get("Cycling"), name='Cycling'),
+#    secondary_y=True
+# )
 #
 # fig.add_trace(
 #     go.Line(x=df.get("Dates"), y=df.get("Cars"), name='Cars'),
