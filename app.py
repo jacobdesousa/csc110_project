@@ -155,11 +155,11 @@ fig.update_layout(
 
 fig.update_xaxes(title_text='Date')
 fig.update_yaxes(title_text='Cases', secondary_y=False)
-# fig.update_yaxes(title_text='Percent Inc/Dec of Transport Relative to 100%', secondary_y=True)
+fig.update_yaxes(title_text='Percent of Transportation used', secondary_y=True)
 
 
 app.layout = html.Div(children=[
-
+    html.Header('Select the mode of transportations you would like to see on the graph'),
     html.Div(children=[
         html.Label('Modes of Transportation'),
         dcc.Checklist(
@@ -177,7 +177,7 @@ app.layout = html.Div(children=[
             ],
             value=[]
         )
-    ], style={'width': '48%', 'display': 'inline-block'}),
+    ], style={'width': '100%', 'display': 'inline-block'}),
 
     html.Div(children=[
         dcc.Graph(
@@ -189,8 +189,8 @@ app.layout = html.Div(children=[
 
 
 @app.callback(
-    Output('graphic', 'figure'),
-    Input('scale', 'value'),
+    Output(component_id='graphic', component_property='figure'),
+    Input(component_id='scale', component_property='value'),
     Input('lines', 'value')
 )
 def update_graph(scale):
