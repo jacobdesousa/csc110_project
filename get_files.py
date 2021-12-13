@@ -1,14 +1,21 @@
-"""CSC110: Project Part 2
-Jacob DeSousa, Marco Marchesano, Siddharth Arya
-Analysis of COVID-19 case data in relation to transportation trends in the UK.
 """
+CSC110: Project Part 2
+Jacob DeSousa, Marco Marchesano, Siddharth Arya
+
+The get_files module downloads the required datasets for use by the rest of the program.
+"""
+
 import os
 import requests
 import python_ta
 
 
 def download_datasets() -> None:
-    """Downloads all of the required datasets to run the program"""
+    """
+    Downloads the required datasets from GitHub if they do not already exist.
+
+    :return: No return. Downloads files into current directory.
+    """
     # Gets transport_data_mod.csv
     if not os.path.isfile('transport_data_mod.csv'):
         csv_url = 'https://raw.githubusercontent.com/jacobdesousa/' \
@@ -19,8 +26,8 @@ def download_datasets() -> None:
         with open('transport_data_mod.csv', 'wb') as csv_file:
             csv_file.write(url_content)
 
+    # Gets covid_cases_mod.csv
     if not os.path.isfile('covid_cases_mod.csv'):
-        # Gets covid_cases_mod.csv
         csv_url = 'https://raw.githubusercontent.com/jacobdesousa' \
                   '/csc110_project/main/covid_cases_mod.csv'
 

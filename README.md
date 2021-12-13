@@ -1,2 +1,0 @@
-# csc110_project
-
