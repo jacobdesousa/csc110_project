@@ -11,9 +11,9 @@ visit http://127.0.0.1:8050 in your web browser.
 
 import dash
 import python_ta
+
 import web_app
 import get_files
-
 
 app = dash.Dash(__name__)
 

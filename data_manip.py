@@ -2,7 +2,8 @@
 CSC110: Project Part 2
 Jacob DeSousa, Marco Marchesano, Siddharth Arya
 
-Data Manipulation functions such as class definitions, loading data, and manipulating data are in this module.
+Data Manipulation functions such as class definitions, loading data,
+and manipulating data are in this module.
 """
 
 import csv
@@ -162,7 +163,7 @@ def average_case_data(data: list[CaseData], grouping: int) -> list[CaseData]:
 def average_transport_data(data: list[TransportationData], grouping: int) \
         -> list[TransportationData]:
     """
-    Returns a list of TransoirtationData.
+    Returns a list of TransportationData.
     The entries in data are grouped by grouping number of elements which are averaged together.
 
     :param data: TransportationData objects in a list

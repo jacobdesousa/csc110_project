@@ -6,9 +6,6 @@ The web_app module handles creating the output for the project.
 It handles creating the graph figure and the HTML layout for the interactive pieces.
 """
 
-import main
-import data_manip
-from data_manip import average_case_data, average_transport_data
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
@@ -16,6 +13,10 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
 import python_ta
+
+from main import app
+import data_manip
+from data_manip import average_case_data, average_transport_data
 
 
 def make_df(grouping: int) -> pd.DataFrame:
@@ -94,7 +95,7 @@ def create_layout(app_to_modify: dash.Dash) -> None:
     ])
 
 
-@main.app.callback(
+@app.callback(
     Output('graphic', 'figure'),
     Input('average_factor', 'value'),
     Input('modes', 'value'),
