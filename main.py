@@ -9,10 +9,11 @@ Run this app with "Run File in Python Console" or "python main.py" and
 visit http://127.0.0.1:8050 in your web browser.
 """
 
-import web_app
-import get_files
 import dash
 import python_ta
+import web_app
+import get_files
+
 
 app = dash.Dash(__name__)
 
