@@ -196,7 +196,7 @@ def update_graph(average_factor, modes):
     )
 
     fig.update_xaxes(title_text='Date')
-    fig.update_yaxes(title_text='Cases', secondary_y=False)
+    fig.update_yaxes(title_text='Confirmed Covid-19 Cases', secondary_y=False)
     fig.update_yaxes(title_text='Percent of Transportation used', secondary_y=True)
 
     fig.update_xaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
