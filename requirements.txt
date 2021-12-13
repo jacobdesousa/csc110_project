@@ -1,8 +1,4 @@
 dash
 pandas
 plotly
-hypothesis
-pygame
-Pillow
-pytest
 requests
