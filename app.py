@@ -135,6 +135,18 @@ fig.add_trace(
     secondary_y=True
 )
 
+colours = {
+    'background': '#D2F0F3',
+    'text': '#131313'
+    }
+fig.update_layout(
+    plot_bgcolor=colours['background'],
+    font_color=colours['text'],
+
+)
+
+# fig.layout = dict(template='plotly_dark')
+
 # fig.add_trace(
 #    go.Line(x=df.get("Dates"), y=df.get("Cycling"), name='Cycling'),
 #    secondary_y=True
@@ -158,6 +170,8 @@ fig.update_xaxes(title_text='Date')
 fig.update_yaxes(title_text='Cases', secondary_y=False)
 fig.update_yaxes(title_text='Percent of Transportation used', secondary_y=True)
 
+fig.update_xaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
+fig.update_yaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
 
 app.layout = html.Div(children=[
     html.Header('Select the mode of transportations you would like to see on the graph'),
@@ -186,10 +200,11 @@ app.layout = html.Div(children=[
             figure=fig
         )
     ]),
-    html.H6("Change the date to see that dates values! (please follow a yyyy/mm/dd format)"),
+    html.H3("Enter any date below to see the data for the given date (please follow a yyyy/mm/dd "
+            "format)"),
     html.Div([
-        "Input: ",
-        dcc.Input(id='my-input', value='initial value', type='text')
+        "Input Date: ",
+        dcc.Input(id='my-input', value='yyyy/mm/dd', type='text')
     ]),
     html.Br(),
     html.Div(id='my-output')
@@ -225,10 +240,11 @@ def update_output_div(input_value):
             sp_national_rail = str(a1.national_rail) + '%'
             sp_national_buses = str(a1.national_buses) + '%'
 
-    return ('New Cases: ' + sp_cases +
-            ',\n Cars: ' + sp_cars +
-            ',\n National Rail: ' + sp_national_rail +
-            ',\n National Buses: ' + sp_national_buses
+    return ('|| New Cases: ' + sp_cases +
+            ', || Cars: ' + sp_cars +
+            ', || National Rail: ' + sp_national_rail +
+            ', || National Buses: ' + sp_national_buses +
+            ' || '
             )
 
 
