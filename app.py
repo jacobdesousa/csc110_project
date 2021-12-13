@@ -9,8 +9,11 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 import pandas as pd
+
+import get_files
 import project2
-import datetime
+
+get_files.download_datasets()
 
 app = dash.Dash(__name__)
 transport_data = project2.load_transport_data('transport_data_mod.csv')
@@ -26,7 +29,7 @@ def average_case_data(data: list[project2.CaseData], grouping: int) -> list[proj
     :return: List of CaseData averaged
 
     Preconditions:
-        - 1 < grouping < len(data)
+        - 0 < grouping < 30
     """
     averaged_data = []
 
@@ -55,7 +58,7 @@ def average_transport_data(data: list[project2.TransportationData], grouping: in
     average use
 
     Preconditions
-        - 1 < grouping < len(data)
+        - 0 < grouping < 30
     """
     averaged_data = []
 
