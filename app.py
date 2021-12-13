@@ -1,14 +1,22 @@
 # Run this app with `python app.py` and
 # visit http://127.0.0.1:8050/ in your web browser.
 
+"""
+CSC110: Project Part 2
+Jacob DeSousa, Marco Marchesano, Siddharth Arya
+Analysis of COVID-19 case data in relation to transportation trends in the UK.
+This file creates the graph to display the data found in the csv files as well as
+performs some computations on the data
+"""
+
 import math
 import dash
-from dash import dcc
-from dash import html
+from dash import dcc, html
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from dash.dependencies import Input, Output
 import pandas as pd
+import python_ta
 
 import get_files
 import project2
@@ -113,7 +121,8 @@ def make_df(grouping: int) -> pd.DataFrame:
         "Dates": [x.date for x in averaged_case_data],
         "Cases": [x.new_cases for x in averaged_case_data],
         "Cars": [x.cars for x in averaged_transportation_data],
-        "Light Commercial Vehicles": [x.light_commercial_vehicles for x in averaged_transportation_data],
+        "Light Commercial Vehicles": [x.light_commercial_vehicles
+                                      for x in averaged_transportation_data],
         "Heavy Goods Vehicles": [x.heavy_goods_vehicles for x in averaged_transportation_data],
         "All Motor Vehicles": [x.all_motor_vehicles for x in averaged_transportation_data],
         "National Rail": [x.national_rail for x in averaged_transportation_data],
@@ -233,4 +242,13 @@ def update_graph(average_factor, modes):
 
 
 if __name__ == '__main__':
+
+    python_ta.check_all(config={
+        'extra-imports': ['math', 'dash', 'plotly.subplots', 'dash.dependencies',
+                          'pandas', 'get_files', 'plotly.graph_objects', 'project2'],
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 100,
+        'disable': ['R1705', 'C0200']
+    })
+
     app.run_server(debug=False)

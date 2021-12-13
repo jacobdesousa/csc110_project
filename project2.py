@@ -6,8 +6,7 @@ Analysis of COVID-19 case data in relation to transportation trends in the UK.
 from dataclasses import dataclass
 import datetime
 import csv
-import dash
-import pandas
+import python_ta
 
 
 @dataclass
@@ -32,7 +31,8 @@ class CaseData:
 @dataclass
 class TransportationData:
     """
-    Formatted data from the UK transport dataset. -1 integer value represents no data for that given entry.
+    Formatted data from the UK transport dataset. -1 integer value
+    represents no data for that given entry.
 
     Instance Attributes:
      -  date: the date of when the data was collected
@@ -111,3 +111,12 @@ def load_transport_data(path: str) -> list[TransportationData]:
             data.append(TransportationData(date, cars, lcv, hgv, mv, nr, lt, lb, nb, cyc))
 
     return data
+
+
+if __name__ == '__main__':
+    python_ta.check_all(config={
+        'extra-imports': ['dataclasses', 'datetime', 'csv', 'python_ta'],
+        'allowed-io': ['load_case_data', 'load_transport_data'],
+        'max-line-length': 100,
+        'disable': ['R1705', 'C0200']
+    })
