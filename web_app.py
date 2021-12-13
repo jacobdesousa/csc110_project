@@ -8,13 +8,9 @@ It handles creating the graph figure and the HTML layout for the interactive pie
 
 import dash
 from dash import dcc, html
-from dash.dependencies import Input, Output
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import pandas as pd
 import python_ta
 
-from main import app
 import data_manip
 from data_manip import average_case_data, average_transport_data
 
@@ -26,7 +22,8 @@ def make_df(grouping: int) -> pd.DataFrame:
     :param grouping: The number of entries in the datasets to average together.
     :return: A dataframe which is based on datasets and modified to fit grouping.
     """
-    averaged_case_data = average_case_data(data_manip.load_case_data('covid_cases_mod.csv'), grouping)
+    averaged_case_data = \
+        average_case_data(data_manip.load_case_data('covid_cases_mod.csv'), grouping)
     averaged_transportation_data = \
         average_transport_data(data_manip.load_transport_data('transport_data_mod.csv'), grouping)
     return pd.DataFrame({
@@ -83,94 +80,12 @@ def create_layout(app_to_modify: dash.Dash) -> None:
                 value=5
             )
         ], style={'width': '35%'})
-
-        # html.H3("Enter any date below to see the data for the given date (please follow a yyyy/mm/dd "
-        #         "format)"),
-        # html.Div([
-        #     "Input Date: ",
-        #     dcc.Input(id='my-input', value='yyyy/mm/dd', type='text')
-        # ]),
-        # html.Br(),
-        # html.Div(id='my-output')
     ])
-
-
-@app.callback(
-    Output('graphic', 'figure'),
-    Input('average_factor', 'value'),
-    Input('modes', 'value'),
-
-)
-def update_graph(average_factor: int, modes: list[str]) -> go.Figure:
-    """
-    This method returns the figure to be displayed as the graph.
-    It is called whenever an option is changed on the main page.
-
-    :param average_factor: The input from the slider on the main page.
-    :param modes: A list of the checkboxes selected on the main page.
-    :return: Returns a figure including the data type modes and averaged with average_factor.
-    """
-    df = make_df(average_factor)
-
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
-    fig.add_trace(
-        go.Line(x=df.get("Dates"), y=df.get("Cases"), name='Cases'),
-        secondary_y=False
-    )
-    for x in modes:
-        fig.add_trace(
-            go.Line(x=df.get("Dates"), y=df.get(x), name=x),
-            secondary_y=True
-        )
-    colours = {
-        'background': '#D2F0F3',
-        'text': '#131313'
-    }
-    fig.update_layout(
-        plot_bgcolor=colours['background'],
-        font_color=colours['text'],
-    )
-
-    fig.update_xaxes(title_text='Date')
-    fig.update_yaxes(title_text='Confirmed Covid-19 Cases', secondary_y=False)
-    fig.update_yaxes(title_text='Percent of Transportation used', secondary_y=True)
-
-    fig.update_xaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
-    fig.update_yaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
-    return fig
-
-
-# @app.callback(
-#     dash.dependencies.Output(component_id='my-output', component_property='children'),
-#     dash.dependencies.Input(component_id='my-input', component_property='value')
-# )
-# def update_output_div(input_value):
-#     date = datetime.date(int(input_value[0:4]), int(input_value[5:7]), int(input_value[8:10]))
-#     sp_cases = ''
-#     sp_cars = ''
-#     sp_national_rail = ''
-#     sp_national_buses = ''
-#     for a1 in case_data:
-#         if a1.date == date:
-#             sp_cases = str(a1.new_cases)
-#
-#     for a1 in transport_data:
-#         if a1.date == date:
-#             sp_cars = str(a1.cars) + '%'
-#             sp_national_rail = str(a1.national_rail) + '%'
-#             sp_national_buses = str(a1.national_buses) + '%'
-#
-#     return ('|| New Cases: ' + sp_cases +
-#             ', || Cars: ' + sp_cars +
-#             ', || National Rail: ' + sp_national_rail +
-#             ', || National Buses: ' + sp_national_buses +
-#             ' || '
-#             )
 
 
 if __name__ == '__main__':
     python_ta.check_all(config={
-        'extra-imports': ['pandas', 'python_ta', 'plotly', 'dash', 'data_manip', 'main'],
+        'extra-imports': ['pandas', 'python_ta', 'dash', 'data_manip'],
         'allowed-io': [],
         'max-line-length': 100,
         'disable': ['R1705', 'C0200']

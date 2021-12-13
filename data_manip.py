@@ -17,7 +17,7 @@ import python_ta
 @dataclass
 class CaseData:
     """
-    Formatted data from the COVID-19 case data
+    Formatted data from the COVID-19 case dataset.
 
     Instance Attributes
       - date: the date of which the data was collected
@@ -175,9 +175,7 @@ def average_transport_data(data: list[TransportationData], grouping: int) \
     """
     averaged_data = []
 
-    count = len(data)
-    while count > 0:
-        count -= grouping
+    while len(data) > 0:
         grouped = data[0:min(grouping, len(data))]
         data = data[grouping:len(data)]
         date = None
