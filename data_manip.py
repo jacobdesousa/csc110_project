@@ -9,9 +9,9 @@ and manipulating data are in this module.
 import csv
 import datetime
 import math
+import doctest
 from dataclasses import dataclass
-
-import python_ta
+import python_ta.contracts
 
 
 @dataclass
@@ -207,8 +207,10 @@ def average_transport_data(data: list[TransportationData], grouping: int) \
 
 
 if __name__ == '__main__':
+    doctest.testmod()
+    python_ta.contracts.check_all_contracts()
     python_ta.check_all(config={
-        'extra-imports': ['dataclasses', 'datetime', 'csv', 'python_ta', 'math'],
+        'extra-imports': ['dataclasses', 'datetime', 'csv', 'python_ta', 'math', 'doctest'],
         'allowed-io': ['load_case_data', 'load_transport_data'],
         'max-line-length': 100,
         'disable': ['R1705', 'C0200']

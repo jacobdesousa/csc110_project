@@ -4,10 +4,10 @@ Jacob DeSousa, Marco Marchesano, Siddharth Arya
 
 The get_files module downloads the required datasets for use by the rest of the program.
 """
-
+import doctest
 import os
 import requests
-import python_ta
+import python_ta.contracts
 
 
 def download_datasets() -> None:
@@ -38,6 +38,8 @@ def download_datasets() -> None:
 
 
 if __name__ == '__main__':
+    doctest.testmod()
+    python_ta.contracts.check_all_contracts()
     python_ta.check_all(config={
         'extra-imports': ['python_ta', 'os', 'requests'],
         'allowed-io': ['download_datasets'],

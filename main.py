@@ -9,15 +9,17 @@ Run this app with "Run File in Python Console" or "python main.py" and
 visit http://127.0.0.1:8050 in your web browser.
 """
 
+import datetime
 import webbrowser
-import dash
-from dash.dependencies import Input, Output
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-import python_ta
 
-import web_app
+import dash
+import plotly.graph_objects as go
+from dash.dependencies import Input, Output
+from plotly.subplots import make_subplots
+
+import data_manip
 import get_files
+import web_app
 
 app = dash.Dash(__name__)
 
@@ -59,23 +61,50 @@ def update_graph(average_factor: int, modes: list[str]) -> go.Figure:
     )
 
     fig.update_xaxes(title_text='Date')
-    fig.update_yaxes(title_text='Confirmed Covid-19 Cases', secondary_y=False)
-    fig.update_yaxes(title_text='Percent of Transportation used', secondary_y=True)
+    fig.update_yaxes(title_text='Confirmed COVID-19 Cases', secondary_y=False)
+    fig.update_yaxes(title_text='Percent of Transportation Used', secondary_y=True)
 
     fig.update_xaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
     fig.update_yaxes(showline=True, linewidth=1, linecolor='black', mirror=True)
     return fig
 
 
+@app.callback(
+    Output('data-output', 'children'),
+    Input('date-input', 'value')
+)
+def update_data_box(date_input) -> str:
+    case_data = data_manip.load_case_data('covid_cases_mod.csv')
+    transport_data = data_manip.load_transport_data('transport_data_mod.csv')
+
+    date = datetime.date(int(date_input[0:4]), int(date_input[5:7]), int(date_input[8:10]))
+    date_case_data = None
+    date_transport_data = None
+    for x in case_data:
+        if x.date == date:
+            date_case_data = x
+    for x in transport_data:
+        if x.date == date:
+            date_transport_data = x
+    if date_case_data is None or date_transport_data is None:
+        return ''
+    else:
+        return 'New Cases: ' + str(date_case_data.new_cases) + \
+               ' || Cumulative Cases: ' + str(date_case_data.cum_cases) + \
+               ' || Cars: ' + str(date_transport_data.cars) + '%' + \
+               ' || Light Commercial Vehicles: ' + \
+               str(date_transport_data.light_commercial_vehicles) + '%' + \
+               ' || Heavy Goods Vehicles: ' + \
+               str(date_transport_data.heavy_goods_vehicles) + '%' + \
+               ' || All Motor Vehicles: ' + str(date_transport_data.all_motor_vehicles) + '%' + \
+               ' || National Rail: ' + str(date_transport_data.national_rail) + '%' + \
+               ' || London Tube: ' + str(date_transport_data.london_tube) + '%' + \
+               ' || London Buses: ' + str(date_transport_data.london_buses) + '%' + \
+               ' || National Buses: ' + str(date_transport_data.national_buses) + '%' + \
+               ' || Cycling: ' + str(date_transport_data.cycling) + '%'
+
+
 if __name__ == '__main__':
-    # python_ta.check_all(config={
-    #     'extra-imports': ['web_app', 'get_files', 'dash', 'python_ta', 'plotly',
-    #                       'dash.dependencies', 'plotly.graph_objects', 'plotly.subplots',
-    #                       'webbrowser'],
-    #     'allowed-io': [],
-    #     'max-line-length': 100,
-    #     'disable': ['R1705', 'C0200']
-    # })
     get_files.download_datasets()
 
     web_app.create_layout(app)
