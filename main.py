@@ -79,7 +79,11 @@ def update_data_box(date_input) -> str:
     case_data = data_manip.load_case_data('covid_cases_mod.csv')
     transport_data = data_manip.load_transport_data('transport_data_mod.csv')
 
-    date = datetime.date(int(date_input[0:4]), int(date_input[5:7]), int(date_input[8:10]))
+    try:
+        date = datetime.date(int(date_input[0:4]), int(date_input[5:7]), int(date_input[8:10]))
+    except ValueError:
+        print('Invalid input in text field: ignoring.')
+        return ''
     date_case_data = None
     date_transport_data = None
     for x in case_data:
