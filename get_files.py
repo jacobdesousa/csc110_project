@@ -3,6 +3,8 @@ CSC110: Project Part 2
 Jacob DeSousa, Marco Marchesano, Siddharth Arya
 
 The get_files module downloads the required datasets for use by the rest of the program.
+
+Copyright (c) 2021 || Jacob DeSousa, Marco Marchesano, Siddharth Arya
 """
 import doctest
 import os

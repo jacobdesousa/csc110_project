@@ -4,6 +4,8 @@ Jacob DeSousa, Marco Marchesano, Siddharth Arya
 
 The web_app module handles creating the output for the project.
 It handles creating the graph figure and the HTML layout for the interactive pieces.
+
+Copyright (c) 2021 || Jacob DeSousa, Marco Marchesano, Siddharth Arya
 """
 
 import doctest
