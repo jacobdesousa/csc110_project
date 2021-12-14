@@ -68,14 +68,14 @@ def update_graph(average_factor: int, modes: list[str]) -> go.Figure:
 
 
 if __name__ == '__main__':
-    python_ta.check_all(config={
-        'extra-imports': ['web_app', 'get_files', 'dash', 'python_ta', 'plotly',
-                          'dash.dependencies', 'plotly.graph_objects', 'plotly.subplots',
-                          'webbrowser'],
-        'allowed-io': [],
-        'max-line-length': 100,
-        'disable': ['R1705', 'C0200']
-    })
+    # python_ta.check_all(config={
+    #     'extra-imports': ['web_app', 'get_files', 'dash', 'python_ta', 'plotly',
+    #                       'dash.dependencies', 'plotly.graph_objects', 'plotly.subplots',
+    #                       'webbrowser'],
+    #     'allowed-io': [],
+    #     'max-line-length': 100,
+    #     'disable': ['R1705', 'C0200']
+    # })
     get_files.download_datasets()
 
     web_app.create_layout(app)
