@@ -9,6 +9,7 @@ Run this app with "Run File in Python Console" or "python main.py" and
 visit http://127.0.0.1:8050 in your web browser.
 """
 
+import webbrowser
 import dash
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
@@ -69,7 +70,8 @@ def update_graph(average_factor: int, modes: list[str]) -> go.Figure:
 if __name__ == '__main__':
     python_ta.check_all(config={
         'extra-imports': ['web_app', 'get_files', 'dash', 'python_ta', 'plotly',
-                          'dash.dependencies', 'plotly.graph_objects', 'plotly.subplots'],
+                          'dash.dependencies', 'plotly.graph_objects', 'plotly.subplots',
+                          'webbrowser'],
         'allowed-io': [],
         'max-line-length': 100,
         'disable': ['R1705', 'C0200']
@@ -77,4 +79,5 @@ if __name__ == '__main__':
     get_files.download_datasets()
 
     web_app.create_layout(app)
+    webbrowser.open('http://127.0.0.1:8050')
     app.run_server(debug=False)
