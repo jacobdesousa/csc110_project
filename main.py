@@ -7,6 +7,8 @@ represent any live changes in the graph.
 
 Run this app with "Run File in Python Console" or "python main.py" and
 visit http://127.0.0.1:8050 in your web browser.
+
+Copyright (c) 2021 || Jacob DeSousa, Marco Marchesano, Siddharth Arya
 """
 
 import datetime

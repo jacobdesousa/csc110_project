@@ -4,6 +4,8 @@ Jacob DeSousa, Marco Marchesano, Siddharth Arya
 
 Data Manipulation functions such as class definitions, loading data,
 and manipulating data are in this module.
+
+Copyright (c) 2021 || Jacob DeSousa, Marco Marchesano, Siddharth Arya
 """
 
 import csv

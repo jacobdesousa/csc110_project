@@ -1,3 +1,5 @@
+# Requirements to run the CSC110 Project
+# for Jacob DeSousa, Marco Marchesano, and Siddharth Arya
 dash
 pandas
 plotly
