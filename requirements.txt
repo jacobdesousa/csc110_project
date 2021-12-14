@@ -4,3 +4,4 @@ dash
 pandas
 plotly
 requests
+python_ta
