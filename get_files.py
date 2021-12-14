@@ -33,7 +33,7 @@ def download_datasets() -> None:
 
         req = requests.get(csv_url)
         url_content = req.content
-        with open('covid_cases.csv', 'wb') as csv_file:
+        with open('covid_cases_mod.csv', 'wb') as csv_file:
             csv_file.write(url_content)
 
 
