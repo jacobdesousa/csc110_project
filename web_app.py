@@ -6,10 +6,11 @@ The web_app module handles creating the output for the project.
 It handles creating the graph figure and the HTML layout for the interactive pieces.
 """
 
+import doctest
 import dash
 from dash import dcc, html
 import pandas as pd
-import python_ta
+import python_ta.contracts
 
 import data_manip
 from data_manip import average_case_data, average_transport_data
@@ -50,6 +51,34 @@ def create_layout(app_to_modify: dash.Dash) -> None:
     :return: No return. Method mutates app_to_modify.
     """
     app_to_modify.layout = html.Div([
+        html.H1(
+            children='CSC110: Project Part 2',
+            style={'textAlign': 'center', 'color': '#131313'}
+        ),
+        html.H3(
+            children='Jacob DeSousa, Marco Marchesano, Siddharth Arya',
+            style={'textAlign': 'center', 'color': '#131313'}
+        ),
+        html.Div(children=[
+            html.Tbody(children='The graphic below shows confirmed cases in the UK by date, '
+                                'and different selected modes of travel. The modes of travel are '
+                                'represented as a percentage of an equivalent day or week prior to'
+                                ' the COVID-19 pandemic.',
+                       style={'textAlign': 'left', 'color': '#131313'}
+                       ),
+            html.Tbody(children='The average factor slider will adjust how often a data point'
+                                ' should be represented. The datasets include daily metrics,'
+                                ' but for a smoother graph a higher average factor can be'
+                                ' selected. Depending on that value, days will be averaged'
+                                ' together to represent data points less often.',
+                       style={'textAlign': 'left', 'color': '#131313'}
+                       ),
+            html.Tbody(children='Data points that were missing from the transportation dataset'
+                                ' will be represented as -1 on the graph.',
+                       style={'textAlign': 'left', 'color': '#131313'}
+                       )
+        ]),
+        dcc.Graph(id='graphic', ),
         html.Div(children=[
             html.Label('Select Modes of Transportation:'),
             dcc.Checklist(
@@ -65,27 +94,42 @@ def create_layout(app_to_modify: dash.Dash) -> None:
                     {'label': 'National Buses', 'value': 'National Buses'},
                     {'label': 'Cycling', 'value': 'Cycling'},
                 ],
-                value=[]
-            )
-        ], style={'width': '100%', 'display': 'inline-block'}),
-        dcc.Graph(id='graphic', ),
-        html.Br(),
+                value=[],
+                style={'display': 'flex', 'flex-direction': 'column'}
+            ),
+
+            html.Br(),
+            html.Div(children=[
+                html.Label('Average Factor:'),
+                dcc.Slider(
+                    id='average_factor',
+                    min=1,
+                    max=30,
+                    marks={i: i if i % 5 == 0 else '' for i in range(1, 31)},
+                    value=5
+                )
+            ]),
+        ], style={'width': '35%', 'horizontalAlign': 'left'}),
+
         html.Div(children=[
-            html.Label('Average Factor:'),
-            dcc.Slider(
-                id='average_factor',
-                min=1,
-                max=30,
-                marks={i: i if i % 5 == 0 else '' for i in range(1, 31)},
-                value=5
-            )
-        ], style={'width': '35%'})
+            html.H3(children='Data by Individual Date:',
+                    style={'textAlign': 'left', 'color': '#131313'}
+                    ),
+            html.Tbody(children='Please input a date in yyyy/mm/dd format to retrieve case and '
+                                'transport data for that particular day.',
+                       style={'textAlign': 'left', 'color': '#131313'}
+                       ),
+            dcc.Input(id='date-input', value='yyyy/mm/dd', type='text')
+        ]),
+        html.Div(id='data-output')
     ])
 
 
 if __name__ == '__main__':
+    doctest.testmod()
+    python_ta.contracts.check_all_contracts()
     python_ta.check_all(config={
-        'extra-imports': ['pandas', 'python_ta', 'dash', 'data_manip'],
+        'extra-imports': ['pandas', 'python_ta', 'dash', 'data_manip', 'doctest'],
         'allowed-io': [],
         'max-line-length': 100,
         'disable': ['R1705', 'C0200']
